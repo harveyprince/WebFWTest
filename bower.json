@@ -1,0 +1,12 @@
+{
+  "name": "hand-react",
+  "description": "",
+  "authors": [
+    "harveyprince <948841233@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/harveyprince/WebFWTest",
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
