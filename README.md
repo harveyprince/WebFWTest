@@ -2,7 +2,7 @@
 ```
 npm install
 bower install
-npm start
+gulp serve
 ```
 ###架构说明
-    通过webpack打包工具进行打包
+    使用gulp集成，其中js通过webpack打包工具进行打包
