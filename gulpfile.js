@@ -6,3 +6,16 @@ gulp.task('default', function() {
     .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest('dist/'));
 });
+gulp.task('serve', ['default'], () => {
+  browserSync({
+    notify: false,
+    port: 9000,
+    server: {
+      baseDir: ['dist','app/page'],
+      routes: {
+        '/bower_components': 'bower_components'
+      }
+    }
+  });
+
+});
