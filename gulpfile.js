@@ -37,7 +37,7 @@ gulp.task('scripts', () => {
       .pipe(reload({stream: true}));
 });
 gulp.task('typescripts', () => {
-    return gulp.src('app/scripts/**/*.ts')
+    return gulp.src('app/scripts/**/*.pack.ts')
         .pipe(named())
         .pipe(webpack(require('./webpack.config.js')))
         .pipe(gulp.dest('.tmp/scripts'))
