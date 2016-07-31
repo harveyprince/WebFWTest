@@ -1,26 +1,22 @@
-///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
+///<reference path="../../../node_modules/angular2/typings/browser.d.ts"/>
 import 'reflect-metadata';
 import 'zone.js/dist/zone';
 import {bootstrap} from 'angular2/platform/browser'
 import {Component,enableProdMode} from 'angular2/core'
 //enableProdMode();
 import { Hero } from './hero.ts';
+import {HeroContent} from "./hero-content.ts";
+import {HeroService} from "./heroService.ts";
 
 @Component({
   selector: 'app',
+  directives: [HeroContent],
   template: `
     <h1>{{title}}</h1>
     <h2>My favorite hero is: {{content}}</h2>
     <p>Heroes:</p>
-    <select class="form-control" required>
-        <option *ngFor="let hero of heroes" [value]="hero.name">{{ hero.name }}</option>
-    </select>
-    <ul>
-      <li *ngFor="let hero of heroes" (click)='onClickHero(hero)'>
-        {{ hero.name }}
-      </li>
-    </ul>
-    <p *ngIf="heroes.length > 3">{{message}}</p>
+    <content></content>
+    <p>{{message}}</p>
     <input #box (keyup)="0" />
     <p>{{box.value}}</p>
     <input [(ngModel)]="model" />
@@ -32,12 +28,6 @@ export class HelloComp {
   content:string;
   message:string;
   model:string;
-  heroes = [
-      new Hero(1, 'Windstorm'),
-      new Hero(13, 'Bombasto'),
-      new Hero(15, 'Magneta'),
-      new Hero(20, 'Tornado')
-  ];
 
   constructor() {
     var that = this
@@ -46,10 +36,6 @@ export class HelloComp {
     that.message = 'loading'
   }
 
-  onClickHero(hero){
-      this.message = hero.name
-  }
-
 }
 
-bootstrap(HelloComp)
+bootstrap(HelloComp,[HeroService])

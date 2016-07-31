@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular2": "^2.0.0-beta.17",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   },
   "devDependencies": {
+    "angular2": "^2.0.0-beta.17",
     "babel": "^6.5.2",
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
