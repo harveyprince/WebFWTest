@@ -11,6 +11,7 @@ module.exports = {
         port: 3333
     },
     */
+    devtool: 'source-map',
     output: {
         filename: '[name].js',
     },
@@ -23,6 +24,11 @@ module.exports = {
                 query: {
                     presets: ['es2015','react']
                 }
+            },
+            {
+                test: /\.ts$/,
+                exclude:  /node_modules/,
+                loader: 'ts-loader'
             }
         ]
     }

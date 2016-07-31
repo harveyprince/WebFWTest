@@ -2,15 +2,19 @@ const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const webpack = require('webpack-stream');
 const browserSync = require('browser-sync');
+const del = require('del');
+
+const named = require('vinyl-named');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-gulp.task('default', function() {
-  return gulp.src('app/scripts/main.js')
-    .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('dist/'));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+
+gulp.task('default', ['clean'], () => {
+  gulp.start('build');
 });
+
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
@@ -26,10 +30,18 @@ gulp.task('styles', () => {
     .pipe(reload({stream: true}));
 });
 gulp.task('scripts', () => {
-  return gulp.src('app/scripts/**/*.js')
+  return gulp.src('app/scripts/**/*.pack.js')
+      .pipe(named())
       .pipe(webpack(require('./webpack.config.js')))
       .pipe(gulp.dest('.tmp/scripts'))
       .pipe(reload({stream: true}));
+});
+gulp.task('typescripts', () => {
+    return gulp.src('app/scripts/**/*.ts')
+        .pipe(named())
+        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(gulp.dest('.tmp/scripts'))
+        .pipe(reload({stream: true}));
 });
 gulp.task('images', () => {
   return gulp.src('app/images/**/*')
@@ -56,7 +68,7 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
 });
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts','typescripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -77,3 +89,4 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   gulp.watch('app/fonts/**/*', ['fonts']);
 
 });
+gulp.task('build', ['styles', 'scripts','typescripts','fonts']);
