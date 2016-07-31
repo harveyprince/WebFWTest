@@ -12,17 +12,26 @@ import { Hero } from './hero.ts';
     <h1>{{title}}</h1>
     <h2>My favorite hero is: {{content}}</h2>
     <p>Heroes:</p>
+    <select class="form-control" required>
+        <option *ngFor="let hero of heroes" [value]="hero.name">{{ hero.name }}</option>
+    </select>
     <ul>
-      <li *ngFor="let hero of heroes">
+      <li *ngFor="let hero of heroes" (click)='onClickHero(hero)'>
         {{ hero.name }}
       </li>
     </ul>
-    <p *ngIf="heroes.length > 3">There are many heroes!</p>
+    <p *ngIf="heroes.length > 3">{{message}}</p>
+    <input #box (keyup)="0" />
+    <p>{{box.value}}</p>
+    <input [(ngModel)]="model" />
+    <p>{{model}}</p>
   `
 })
 export class HelloComp {
   title: string;
   content:string;
+  message:string;
+  model:string;
   heroes = [
       new Hero(1, 'Windstorm'),
       new Hero(13, 'Bombasto'),
@@ -34,7 +43,13 @@ export class HelloComp {
     var that = this
     that.title = 'Hello World Title!'
     that.content = 'here is the content'
+    that.message = 'loading'
   }
+
+  onClickHero(hero){
+      this.message = hero.name
+  }
+
 }
 
 bootstrap(HelloComp)
