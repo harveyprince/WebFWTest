@@ -3,13 +3,13 @@ import 'reflect-metadata';
 import 'zone.js/dist/zone';
 import {bootstrap} from 'angular2/platform/browser'
 import {Component,enableProdMode} from 'angular2/core'
-enableProdMode();
+//enableProdMode();
 
 @Component({
   selector: 'app',
   template: `{{message}}`
 })
-export class MyAppComponent {
+export class HelloComp {
   message: string;
 
   constructor() {
@@ -18,4 +18,4 @@ export class MyAppComponent {
   }
 }
 
-bootstrap(MyAppComponent)
+bootstrap(HelloComp)
