@@ -1,3 +1,4 @@
+var path = require('path');
 module.exports = {
 /*
     entry: './app/scripts/main.js',
@@ -15,6 +16,9 @@ module.exports = {
     output: {
         filename: '[name].js',
     },
+    resolve: {
+        extensions: ['', '.ts', '.js']
+    },
     module: {
         loaders: [
             {
@@ -30,6 +34,7 @@ module.exports = {
                 exclude:  /node_modules/,
                 loader: 'ts-loader'
             }
-        ]
+        ],
+        noParse: [ path.join(__dirname, 'node_modules', 'angular2', 'bundles') ]
     }
 }
