@@ -68,7 +68,7 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
 });
-gulp.task('serve', ['clean', 'styles', 'scripts','typescripts', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts','typescripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -90,4 +90,4 @@ gulp.task('serve', ['clean', 'styles', 'scripts','typescripts', 'fonts'], () => 
   gulp.watch('app/fonts/**/*', ['fonts']);
 
 });
-gulp.task('build', ['clean', 'styles', 'scripts','typescripts','fonts']);
+gulp.task('build', ['styles', 'scripts','typescripts','fonts']);
